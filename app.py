@@ -7,7 +7,7 @@ import time
 
 st.set_page_config(page_title="Fluensy - Deteksi Bot", page_icon="🕵️", layout="centered")
 
-st.title("🕵️ Cek Kualitas Akun Instagram")
+st.title(" Cek Kualitas Akun Instagram")
 st.write("Sistem kecerdasan buatan untuk menganalisis apakah sebuah akun adalah Bot atau Manusia.")
 st.markdown("---")
 
@@ -38,7 +38,7 @@ except Exception as e:
     st.error(f"Gagal memuat sistem AI. Pastikan file .keras dan .pkl ada di folder yang sama. Error: {e}")
     st.stop()
 
-st.subheader("📊 Masukkan Data Profil")
+st.subheader(" Masukkan Data Profil")
 
 col1, col2 = st.columns(2)
 
@@ -57,7 +57,7 @@ with col2:
     ratio_num_username = st.slider("Rasio Angka di Username (0.0 - 1.0)", 0.0, 1.0, 0.0)
     ratio_num_fullname = st.slider("Rasio Angka di Nama Lengkap (0.0 - 1.0)", 0.0, 1.0, 0.0)
 
-if st.button("🔍 Analisis Akun", use_container_width=True):
+if st.button(" Analisis Akun", use_container_width=True):
     with st.spinner('AI sedang memindai pola akun...'):
         time.sleep(1) 
 
@@ -76,7 +76,7 @@ if st.button("🔍 Analisis Akun", use_container_width=True):
         prediction_prob = model.predict(input_scaled, verbose=0)[0][0]
         
         st.markdown("---")
-        st.subheader("💡 Hasil Analisis")
+        st.subheader(" Hasil Analisis")
         
         prob_persen = prediction_prob * 100
         is_bot = prediction_prob > 0.5
@@ -84,7 +84,7 @@ if st.button("🔍 Analisis Akun", use_container_width=True):
         insights = []
         
         if is_bot:
-            st.error(f"⚠️ **TERDETEKSI SEBAGAI BOT (FAKE)**")
+            st.error(f"**TERDETEKSI SEBAGAI BOT (FAKE)**")
             st.write(f"Tingkat Keyakinan AI: **{prob_persen:.2f}%**")
             st.progress(float(prediction_prob))
             
@@ -106,7 +106,7 @@ if st.button("🔍 Analisis Akun", use_container_width=True):
 
         else:
             prob_asli = (1 - prediction_prob) * 100
-            st.success(f"✅ **AKUN MANUSIA ASLI (REAL)**")
+            st.success(f" **AKUN MANUSIA ASLI (REAL)**")
             st.write(f"Tingkat Keyakinan AI: **{prob_asli:.2f}%**")
             st.progress(float(1 - prediction_prob))
             
