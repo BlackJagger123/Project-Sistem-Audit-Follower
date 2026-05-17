@@ -11,6 +11,6 @@ Model ini berfungsi layaknya seorang analis data super cepat. Tugasnya meliputi:
 - Menganalisis Pola: Mencocokkan data tersebut dengan pola jaringan bot yang sudah dipelajari oleh AI sebelumnya.
 - Mengeluarkan Vonis (Scoring): Menghasilkan skor probabilitas dari 0% hingga 100% untuk menentukan apakah akun tersebut adalah Manusia Asli atau Bot.
 
-## Cara Kerja di Ekosistem Fluensy
+## Cara Kerja
 File utama dalam repositori ini (fake_followers_model.keras) adalah model final yang sudah selesai dilatih dan sudah sangat pintar.
 Sistem ini dirancang berkonsep Plug & Play. Model ini siap ditanamkan ke dalam API utama, di mana ia akan bekerja berdampingan dengan skrip penarik data (Scraper) untuk mengaudit kualitas pengikut seorang influencer secara massal dan otomatis.
