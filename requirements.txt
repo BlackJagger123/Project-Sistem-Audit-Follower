@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+tensorflow==2.21.0
+keras==3.14.0
+pandas
+numpy
+scikit-learn
+joblib
+apify-client
