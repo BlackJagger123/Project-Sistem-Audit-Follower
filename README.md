@@ -14,7 +14,16 @@
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack AI
+* **Bahasa Pemrograman:** Python 3.11
+* **Framework Backend:** FastAPI, Uvicorn, Pydantic
+* **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
+* **Data Extraction:** Apify Client SDK
+* **Deployment (Opsional):** Hugging Face Spaces (Docker)
+
+---
+
+## 🛠️ Tech Stack FULLSTACK
 * **Bahasa Pemrograman:** Python 3.11
 * **Framework Backend:** FastAPI, Uvicorn, Pydantic
 * **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
