@@ -23,7 +23,7 @@
 
 ---
 
-## 🧠 Penjelasan Model Machine Learning (Deep Learning)
+## 🧠 Penjelasan Model Deep Learning
 Proyek ini mengimplementasikan arsitektur **Deep Learning** jenis *Multi-Layer Perceptron* (MLP) untuk mengklasifikasikan akun menjadi Manusia Asli (0) atau Bot (1).
 
 * **Input Features:** Model menerima 11 metrik numerik hasil ekstraksi *scraper*, antara lain: keberadaan foto profil kustom, rasio angka pada *username* dan *fullname*, panjang bio, keberadaan *external link*, status *private*, serta jumlah *posts*, *followers*, dan *following*.
