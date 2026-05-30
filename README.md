@@ -24,11 +24,10 @@
 ---
 
 ## 🛠️ Tech Stack FULLSTACK
-* **Bahasa Pemrograman:** Python 3.11
-* **Framework Backend:** FastAPI, Uvicorn, Pydantic
-* **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
-* **Data Extraction:** Apify Client SDK
-* **Deployment (Opsional):** Hugging Face Spaces (Docker)
+* **Package Manager:** npm
+* **Teknologi Frontend:** React 18, Vite, Tailwind CSS, shadcn/ui
+* **Teknologi Backend:** Node.js, Express, PostgreSQL, JWT, Google Oauth
+* **Deployment:** Vercel
 
 ---
 
