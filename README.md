@@ -93,17 +93,25 @@ model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
 ## 💻 Petunjuk Setup Environment FS
 **Frontend**
 ### 1. Kloning Repositori
+```bash
 Git clone https://github.com/Bk1784/capstone_project
 cd fakradar
+```
 
 ### 2. Install Dependencies
+```bash
 npm install
+```
 
 ### 3. Jalankan Development
+```bash
 npm run dev
+```
 
 ### 4. Akses Browser
+```bash
 http://localhost:5173
+```
 
 **Backend**
 
