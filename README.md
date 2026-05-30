@@ -32,6 +32,15 @@
 
 ---
 
+## 🛠️ Tech Stack DATA SCIENCE
+* **Bahasa Pemrograman:** Python 3.11
+* **Framework Backend:** FastAPI, Uvicorn, Pydantic
+* **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
+* **Data Extraction:** Apify Client SDK
+* **Deployment (Opsional):** Hugging Face Spaces (Docker)
+
+---
+
 ## 🧠 Penjelasan Model Deep Learning
 Proyek ini mengimplementasikan arsitektur **Deep Learning** jenis *Multi-Layer Perceptron* (MLP) untuk mengklasifikasikan akun menjadi Manusia Asli (0) atau Bot (1).
 
