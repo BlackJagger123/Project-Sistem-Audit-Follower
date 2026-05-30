@@ -90,8 +90,25 @@ scaler = joblib.load('scaler.pkl')
 # Load Model
 model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
 ````
+## 💻 Petunjuk Setup Environment FS
+**Frontend**
+### 1. Kloning Repositori
+Git clone https://github.com/Bk1784/capstone_project
+cd fakradar
 
-## 💻 Petunjuk Setup Environment
+### 2. Install Dependencies
+npm install
+
+### 3. Jalankan Development
+npm run dev
+
+### 4. Akses Browser
+http://localhost:5173
+
+**Backend**
+
+
+## 💻 Petunjuk Setup Environment AI
 
 ### 1. Kloning Repositori
 ```bash
