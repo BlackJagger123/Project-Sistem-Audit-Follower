@@ -24,11 +24,10 @@
 ---
 
 ## 🛠️ Tech Stack FULLSTACK
-* **Bahasa Pemrograman:** Python 3.11
-* **Framework Backend:** FastAPI, Uvicorn, Pydantic
-* **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
-* **Data Extraction:** Apify Client SDK
-* **Deployment (Opsional):** Hugging Face Spaces (Docker)
+* **Package Manager:** npm
+* **Teknologi Frontend:** React 18, Vite, Tailwind CSS, shadcn/ui
+* **Teknologi Backend:** Node.js, Express, PostgreSQL, JWT, Google Oauth
+* **Deployment:** Vercel
 
 ---
 
@@ -91,8 +90,33 @@ scaler = joblib.load('scaler.pkl')
 # Load Model
 model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
 ````
+## 💻 Petunjuk Setup Environment FS
+**Frontend**
+### 1. Kloning Repositori
+```bash
+Git clone https://github.com/Bk1784/capstone_project
+cd fakradar
+```
 
-## 💻 Petunjuk Setup Environment
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Jalankan Development
+```bash
+npm run dev
+```
+
+### 4. Akses Browser
+```bash
+http://localhost:5173
+```
+
+**Backend**
+
+
+## 💻 Petunjuk Setup Environment AI
 
 ### 1. Kloning Repositori
 ```bash
