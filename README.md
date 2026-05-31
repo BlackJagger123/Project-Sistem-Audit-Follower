@@ -14,11 +14,7 @@
 
 ---
 
-<<<<<<< Updated upstream
 ## 🛠️ Tech Stack AI
-=======
-## 🛠️ Tech Stack
->>>>>>> Stashed changes
 * **Bahasa Pemrograman:** Python 3.11
 * **Framework Backend:** FastAPI, Uvicorn, Pydantic
 * **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
@@ -27,7 +23,6 @@
 
 ---
 
-<<<<<<< Updated upstream
 ## 🛠️ Tech Stack FULLSTACK
 * **Bahasa Pemrograman:** Python 3.11
 * **Framework Backend:** FastAPI, Uvicorn, Pydantic
@@ -78,40 +73,6 @@ Berdasarkan persyaratan proyek capstone, model Machine Learning yang digunakan u
 
 **Tautan Unduhan Model:**
 👉 **[[Klik di sini untuk mengakses folder Google Drive Model AI](https://drive.google.com/drive/folders/1T8LtyPmcPHuAdEaM8YbgpPMQ1f7XVCVm?usp=sharing)]**
-=======
-## 🧠 Penjelasan Model Machine Learning (Deep Learning)
-Proyek ini mengimplementasikan arsitektur **Deep Learning** jenis *Multi-Layer Perceptron* (MLP) untuk mengklasifikasikan akun menjadi Manusia Asli (0) atau Bot (1).
-
-* **Input Features:** Model menerima 11 metrik numerik hasil ekstraksi *scraper*, antara lain: keberadaan foto profil kustom, rasio angka pada *username* dan *fullname*, panjang bio, keberadaan *external link*, status *private*, serta jumlah *posts*, *followers*, dan *following*.
-* **Arsitektur Deep Learning:** Dibangun dari nol menggunakan TensorFlow/Keras dengan struktur lapisan yang dalam (*deep*):
-  * **Input Layer:** 11 *nodes* (menyesuaikan jumlah input fitur).
-  * **Deep Hidden Layers:** * Lapis 1: 64 *nodes* (Aktivasi ReLU) dilengkapi dengan *Dropout (0.1)* untuk mencegah penghafalan data (*overfitting*).
-    * Lapis 2: 32 *nodes* (Aktivasi ReLU).
-    * Lapis 3: 16 *nodes* (Aktivasi ReLU).
-  * **Output Layer:** 1 *node* (Aktivasi Sigmoid) untuk menghasilkan probabilitas akhir antara 0.0 hingga 1.0.
-* **Custom Loss Function:** Model ini menggunakan fungsi `BinaryCrossentropy` kustom dengan penambahan nilai *epsilon* (`1e-7`) untuk mencegah *error log(0)* selama proses pelatihan dan perbaikan bobot.
-* **Hasil Evaluasi:** Model mencapai **Akurasi Ujian (Test Accuracy) sebesar 96.45%** pada *dataset* pengujian.
-
----
-
-## ⚙️ Penjelasan Cara Kerja Backend & Scraper (Apify)
-Sistem *backend* bekerja melalui alur sekuensial berikut setiap kali menerima *request*:
-
-1. **Fase 0 - Validasi Target:** Scraper memvalidasi profil akun target. Jika akun berstatus *Private*, API akan memotong proses dan mengembalikan status HTTP `403 Forbidden` untuk menjaga privasi.
-2. **Fase 1 - Ekstraksi Followers:** Scraper tanpa-*cookies* menarik daftar 50 *username* pengikut terbaru akun target.
-3. **Fase 2 - Ekstraksi Profil:** Mengirimkan ke-50 *username* tersebut kembali ke Apify untuk dibedah metrik profilnya secara detail (menghasilkan data JSON).
-4. **Fase 3 - Feature Engineering:** Memproses data JSON menjadi 11 matriks angka, lalu melakukan standarisasi data menggunakan `scaler.pkl`.
-5. **Fase 4 - AI Inference & Sec Acc Saver:** Mengirim matriks ke model `.keras`. Akun yang mendapat skor probabilitas > 0.5 diinterogasi ulang. Jika akun memiliki *following* sewajarnya, memiliki *postingan*, atau berfoto, vonis bot dibatalkan.
-
----
-
-## 🔗 Tautan & Cara Load Model ML
-
-Berdasarkan persyaratan proyek capstone, model Machine Learning yang digunakan untuk deteksi ini telah diunggah ke penyimpanan *cloud* pribadi.
-
-**Tautan Unduhan Model:**
-👉 **[Klik di sini untuk mengakses folder Google Drive Model AI](https://drive.google.com/drive/folders/1T8LtyPmcPHuAdEaM8YbgpPMQ1f7XVCVm?usp=sharing)**
->>>>>>> Stashed changes
 
 Folder tersebut berisi dua file krusial:
 1. `fake_followers_model.keras`: Arsitektur dan bobot *Neural Network*.
@@ -128,7 +89,6 @@ import joblib
 scaler = joblib.load('scaler.pkl')
 
 # Load Model
-<<<<<<< Updated upstream
 model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
 ````
 
@@ -199,6 +159,3 @@ Kirimkan HTTP POST ke endpoint /api/cek-bot dengan body JSON seperti berikut:
 
 ````
 
-=======
-model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
->>>>>>> Stashed changes
