@@ -39,6 +39,46 @@
 * **Deployment (Opsional):** Hugging Face Spaces (Docker)
 
 ---
+##  📋 Pengerjaan Frontend
+1. Diskusi kebutuhan sistem bersama tim backend
+2. Menyusun Product Requirements Document (PRD) — fitur, user roles, use case, tech stack
+3. Desain UI/UX menggunakan Figma — Landing Page, Login, Dashboard, Profile
+4. Inisialisasi project React 18 + Vite + Tailwind CSS + shadcn/ui
+5. Setup routing dengan React Router dan struktur folder (pages, components, context, utils)
+6. Implementasi AuthContext untuk state autentikasi global
+7. Implementasi Google OAuth flow — redirect ke /auth/google, tangkap token di /auth/callback
+8. Implementasi CallbackPage — baca query params token, hit /auth/me, simpan ke localStorage
+9. Implementasi Dashboard — sidebar riwayat audit (GET /audits), form input username, tampilkan hasil analisis AI
+10. Implementasi detail audit — klik sidebar → GET /audits/:id → tampilkan detail lengkap
+11. Implementasi ProfilePage — tampilkan data user, update nama via PUT /profile, refetch /auth/me
+12. Implementasi protected routes — redirect ke login jika belum autentikasi
+13. Testing manual semua fitur — login, analisis akun valid/private/@, riwayat, edit profil, logout
+14. Deploy ke Vercel dan verifikasi aplikasi live di production
+
+##  📋 Pengerjaan Backend
+1. Diskusi kebutuhan sistem bersama tim frontend
+2. Menyusun Product Requirements Document (PRD) — fitur, user roles, use case, tech stack
+3. Merancang Entity Relationship Diagram (ERD) — tabel users, authentications, audits beserta relasinya
+4. Menyusun API Contract — endpoint, request body, response sukses, response error, auth requirements
+5. Membuat Postman Collection sebagai referensi testing untuk tim frontend
+6. Inisialisasi project Node.js dengan arsitektur modular (controller, repository, validator, middleware, routes)
+7. Install dependencies — Express, Prisma, Passport, JWT, Joi, CORS, dotenv
+8. Konfigurasi environment variables di file .env serta setup CORS multi-origin untuk mendukung frontend development dan production
+9. Setup Supabase — buat project, ambil connection string pooling (port 6543) dan direct (port 5432)
+10. Inisialisasi Prisma ORM — prisma init, tulis schema (User, Authentication, Audit, enum)
+11. Jalankan migrasi database ke Supabase — prisma migrate dev
+12. Implementasi custom error classes — AuthenticationError, AuthorizationError, NotFoundError, InvariantError, ServerError serta error middleware dengan pesan berbeda per status code
+13. Implementasi TokenManager — generate dan verify access token & refresh token berbasis JWT
+14. Implementasi Google OAuth 2.0 dengan Passport.js — strategy, upsert user ke DB, serta perbaikan bug preserve nama user saat re-login
+15. Implementasi auth middleware — verifikasi JWT dari Authorization header
+16. Implementasi semua endpoint Authentication, Audit, dan Profile beserta controller, repository, validator, dan routes masing-masing
+17. Implementasi AI Service helper — hit AI eksternal, parse response, derive risk label, handle status restricted (403) & error
+18. Testing manual semua endpoint via Postman Collection dan integrasi dengan AI service
+19. Implementasi halaman landing page pada root endpoint sebagai dokumentasi visual API serta health check endpoint untuk monitoring
+20. Konfigurasi deployment Vercel — vercel.json, serverless entry point, postinstall prisma generate
+21. Migrasi codebase dari ESM ke CJS — resolve konflik ERR_INTERNAL_ASSERTION di Node 20
+22. Set environment variables di Vercel Dashboard, update Google Cloud Console callback URL, deploy ke Vercel dan verifikasi API live di production
+---
 
 ## 🧠 Penjelasan Model Deep Learning
 Proyek ini mengimplementasikan arsitektur **Deep Learning** jenis *Multi-Layer Perceptron* (MLP) untuk mengklasifikasikan akun menjadi Manusia Asli (0) atau Bot (1).
@@ -113,8 +153,97 @@ npm run dev
 http://localhost:5173
 ```
 
-**Backend**
+## Backend
+Pastikan sudah terinstall di sistem:
 
+- [Node.js v20+](https://nodejs.org)
+- npm (sudah termasuk bersama Node.js)
+- Akun [Supabase](https://supabase.com) untuk database
+- Akun [Google Cloud Console](https://console.cloud.google.com) untuk OAuth credentials
+
+### 1. Clone Repository
+
+bash
+git clone https://github.com/username/inspector-api.git
+cd inspector-api
+
+
+### 2. Install Dependencies
+
+bash
+npm install
+
+
+### 3. Setup Environment Variables
+
+Buat file .env di root project:
+
+env
+# Database — ambil dari Supabase Dashboard > Project Settings > Database
+DATABASE_URL="postgresql://postgres.[ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://postgres.[ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres"
+
+# JWT — isi dengan string random yang panjang
+JWT_ACCESS_SECRET=your_access_secret_here
+JWT_REFRESH_SECRET=your_refresh_secret_here
+
+# Google OAuth — ambil dari Google Cloud Console > Credentials
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/callback
+
+# Frontend URLs
+FRONTEND_URL_DEV=http://localhost:5173
+FRONTEND_URL_PROD=https://capstone-project-taupe-one.vercel.app
+
+# AI Service
+AI_SERVICE_URL=http://your-ai-service-url
+
+PORT=3000
+NODE_ENV=development
+
+
+### 4. Generate Prisma Client
+
+bash
+npx prisma generate
+
+
+### 5. Jalankan Migrasi Database
+
+bash
+npx prisma migrate dev
+
+
+### 6. Jalankan Development Server
+
+bash
+npm run start:dev
+
+
+Server berjalan di http://localhost:3000
+
+### 7. Verifikasi
+
+bash
+curl http://localhost:3000/api/health
+# Output: {"status":"ok"}
+
+
+## 🚢 Deployment ke Vercel
+
+bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login
+vercel login
+
+# Deploy production
+vercel --prod
+
+
+Set semua variabel .env di *Vercel Dashboard → Settings → Environment Variables*, lalu update GOOGLE_CALLBACK_URL ke URL production dan daftarkan di Google Cloud Console → Authorized Redirect URIs.
 
 ## 💻 Petunjuk Setup Environment AI
 
