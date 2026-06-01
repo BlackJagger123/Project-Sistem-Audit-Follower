@@ -1,0 +1,77 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  avatar_url  String?
+  provider    String   @default("google")
+  provider_id String   @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  authentications Authentication[]
+  audits          Audit[]
+
+  @@index([email])
+  @@index([provider_id])
+  @@map("users")
+}
+
+model Authentication {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  created_at DateTime @default(now())
+
+  @@index([token])
+  @@map("authentications")
+}
+
+model Audit {
+  id                   String      @id @default(uuid())
+  user_id              String
+  user                 User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  ig_username          String
+
+  status               AuditStatus @default(pending)
+
+  total_sample         Int?
+  bot_percentage       Decimal?    @db.Decimal(5, 2)
+  real_percentage      Decimal?    @db.Decimal(5, 2)
+  risk_label           RiskLabel?
+  recommendation       String?
+  raw_ai_response      Json?
+  error_message        String?
+  created_at           DateTime    @default(now())
+  updated_at           DateTime    @updatedAt
+
+  @@index([user_id])
+  @@index([created_at(sort: Desc)])
+  @@index([user_id, created_at(sort: Desc)])
+  @@map("audits")
+}
+
+enum AuditStatus {
+  pending
+  processing
+  completed
+  failed
+}
+
+enum RiskLabel {
+  low
+  medium
+  high
+}

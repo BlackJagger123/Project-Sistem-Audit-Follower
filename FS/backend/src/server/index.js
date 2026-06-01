@@ -1,0 +1,121 @@
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const passport = require('../security/passport.js');
+const router = require('../routes/index.js');
+const errorMiddleware = require('../middlewares/error.js');
+
+dotenv.config();
+
+const createServer = () => {
+  const app = express();
+
+  app.use(cors({
+    origin: [
+      process.env.FRONTEND_URL_DEV,
+      process.env.FRONTEND_URL_PROD,
+    ],
+    credentials: true,
+  }));
+  app.use(express.json());
+  app.use(passport.initialize());
+
+  app.get('/', (_req, res) => {
+    res.setHeader('Content-Type', 'text/html');
+    res.send(HTML);
+  });
+
+  app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
+
+  app.use('/api', router);
+  app.use(errorMiddleware);
+
+  return app;
+};
+
+const HTML = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InsPector API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      :root{--bg:#080c10;--surface:#0d1117;--border:#1c2333;--accent:#2dd4bf;--text:#e2e8f0;--muted:#64748b;--green:#34d399;--amber:#fbbf24}
+      body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column}
+      body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(45,212,191,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+      .glow{position:fixed;width:600px;height:600px;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+      .glow-1{background:rgba(45,212,191,0.07);top:-200px;left:-100px}
+      .glow-2{background:rgba(129,140,248,0.06);bottom:-200px;right:-100px}
+      nav{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;max-width:860px;margin:0 auto;width:100%;padding:28px 32px;border-bottom:1px solid var(--border)}
+      .logo{font-size:15px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent)}
+      .logo span{color:var(--muted)}
+      main{position:relative;z-index:1;flex:1;max-width:860px;margin:0 auto;width:100%;padding:52px 32px 40px;display:flex;flex-direction:column;gap:40px;opacity:0;transform:translateY(20px);animation:fadeUp 0.6s ease forwards 0.15s}
+      .section-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+      .section-head h2{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+      .section-head::after{content:'';flex:1;height:1px;background:var(--border)}
+      .endpoints{display:flex;flex-direction:column;gap:6px}
+      .ep{display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:16px;padding:12px 18px;background:var(--surface);border:1px solid var(--border);border-radius:8px;transition:border-color 0.2s,background 0.2s}
+      .ep:hover{border-color:rgba(45,212,191,0.25);background:rgba(45,212,191,0.025)}
+      .ep-method{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;text-align:center;padding:3px 0;border-radius:4px}
+      .GET{background:rgba(52,211,153,0.1);color:#34d399}
+      .POST{background:rgba(96,165,250,0.1);color:#60a5fa}
+      .PUT{background:rgba(251,191,36,0.1);color:#fbbf24}
+      .DELETE{background:rgba(248,113,113,0.1);color:#f87171}
+      .ep-url{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)}
+      .ep-url .param{color:var(--amber)}
+      .auth-pill{font-size:10px;padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+      .auth-jwt{background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)}
+      .auth-pub{background:rgba(100,116,139,0.1);color:var(--muted);border:1px solid var(--border)}
+      footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24px 32px;opacity:0;animation:fadeUp 0.6s ease forwards 0.4s}
+      .footer-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+      .footer-inner p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+      .footer-inner p b{color:var(--accent);font-weight:400}
+      @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+      @media(max-width:560px){.ep{grid-template-columns:52px 1fr auto;gap:10px}.ep-url{font-size:12px}nav,main{padding-left:20px;padding-right:20px}.footer-inner{padding:0 20px;flex-direction:column;align-items:flex-start;gap:6px}}
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <nav>
+      <div class="logo">Ins<span>Pector</span> API</div>
+    </nav>
+    <main>
+      <div>
+        <div class="section-head"><h2>Authentication</h2></div>
+        <div class="endpoints">
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/auth/google</span><span class="auth-pill auth-pub">public</span></div>
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/auth/google/callback</span><span class="auth-pill auth-pub">public</span></div>
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/auth/me</span><span class="auth-pill auth-jwt">JWT</span></div>
+          <div class="ep"><span class="ep-method PUT">PUT</span><span class="ep-url">/auth/refresh</span><span class="auth-pill auth-pub">public</span></div>
+          <div class="ep"><span class="ep-method DELETE">DELETE</span><span class="ep-url">/auth/logout</span><span class="auth-pill auth-pub">public</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-head"><h2>Audits</h2></div>
+        <div class="endpoints">
+          <div class="ep"><span class="ep-method POST">POST</span><span class="ep-url">/audits</span><span class="auth-pill auth-jwt">JWT</span></div>
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/audits</span><span class="auth-pill auth-jwt">JWT</span></div>
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/audits/<span class="param">:id</span></span><span class="auth-pill auth-jwt">JWT</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-head"><h2>Profile</h2></div>
+        <div class="endpoints">
+          <div class="ep"><span class="ep-method GET">GET</span><span class="ep-url">/profile</span><span class="auth-pill auth-jwt">JWT</span></div>
+          <div class="ep"><span class="ep-method PUT">PUT</span><span class="ep-url">/profile</span><span class="auth-pill auth-jwt">JWT</span></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-inner">
+        <p>InsPector &nbsp;·&nbsp; <b>API v1.0</b></p>
+        <p>© 2026 copyright by <b>anas</b></p>
+      </div>
+    </footer>
+  </body>
+</html>`;
+
+module.exports = createServer;
