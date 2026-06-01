@@ -32,11 +32,11 @@
 ---
 
 ## 🛠️ Tech Stack DATA SCIENCE
-* **Bahasa Pemrograman:** Python 3.11
-* **Framework Backend:** FastAPI, Uvicorn, Pydantic
-* **Machine Learning:** TensorFlow (Keras), Scikit-Learn (Joblib), Pandas, NumPy
-* **Data Extraction:** Apify Client SDK
-* **Deployment (Opsional):** Hugging Face Spaces (Docker)
+* **Data Collection & Ingestion:** Python, Apify Client SDK, Requests, JSON parser.
+* **Exploratory Data Analysis (EDA) & Preprocessing:**  Pandas, NumPy, Matplotlib, & Seaborn.
+* **Feature Engineering & Transformation:** Scikit-Learn, & (StandardScaler / MinMaxScaler).
+* **A/B Testing & Statistical Analysis:** SciPy (stats) & Statsmodels.
+* **Model Deployment Dashboard:** Streamlit & Streamlit Cloud.
 
 ---
 
@@ -90,6 +90,62 @@ scaler = joblib.load('scaler.pkl')
 # Load Model
 model = tf.keras.models.load_model('fake_followers_model.keras', compile=False)
 ````
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+## 💻 Petunjuk Setup Environment DS (Data Science)
+
+### 1. Masuk ke Direktori Proyek Data Science
+Pastikan file EDA_Project_Capstone.ipynb, app.py, instagram_account.csv, dan requirements.txt berada dalam folder yang sama.
+```bash
+cd nama-folder-proyek-kamu
+````
+
+### 2. Buat dan Aktifkan Virtual Environment
+Sangat disarankan menggunakan virtual environment agar library tidak bentrok.
+
+untuk Windows :
+```bash
+python -m venv venv
+venv\Scripts\activate
+````
+untuk Mac/Linux :
+````bash
+python3 -m venv venv
+source venv/bin/activate
+````
+
+### 3. Instalasi Dependencies
+Instal semua pustaka analisis data yang terdaftar di file requirements.txt (streamlit, pandas, matplotlib, seaborn, scipy).
+````Bash
+pip install -r requirements.txt
+````
+
+## 🚀 Cara Menjalankan Modul Data Science
+
+### A. Membuka Notebook Analisis (EDA)
+Untuk menjalankan atau melihat kembali pengujian hipotesis statistik T-Test pada file Jupyter Notebook
+```bash
+jupyter notebook
+```
+Lalu pilih dan buka file EDA_Project_Capstone.ipynb di browser.
+
+### B. Menjalankan Dashboard Analisis (Streamlit Lokal)
+Pastikan virtual environment masih aktif, lalu jalankan perintah berikut untuk membuka dashboard visualisasi
+```bash
+streamlit run app.py
+```
+Aplikasi dashboard otomatis akan terbuka di browsermu pada alamat http://localhost:8501.
+
+### C. Deployment ke Streamlit Cloud
+1. Pastikan seluruh file (app.py, instagram_account.csv, dan requirements.txt) sudah di-push ke repositori GitHub kamu.
+2. Buka Streamlit Share dan masuk menggunakan akun GitHub.
+3. Klik tombol New app, lalu pilih repositori proyek ini.
+4. Set bagian Main file path menjadi app.py.
+5. Klik Deploy! Aplikasi dashboard analisismu kini dapat diakses secara publik.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## 💻 Petunjuk Setup Environment FS
 **Frontend**
 ### 1. Kloning Repositori
@@ -115,6 +171,8 @@ http://localhost:5173
 
 **Backend**
 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 💻 Petunjuk Setup Environment AI
 
@@ -149,6 +207,9 @@ APIFY_TOKEN_1=apify_api_token_pertama_kamu
 APIFY_TOKEN_2=apify_api_token_kedua_kamu
 APIFY_TOKEN_3=apify_api_token_ketiga_kamu
 ````
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## 🚀 Cara Menjalankan Aplikasi
 ### A. Menjalankan Server (Localhost)
 Pastikan virtual environment sudah aktif, lalu jalankan server menggunakan Uvicorn:
