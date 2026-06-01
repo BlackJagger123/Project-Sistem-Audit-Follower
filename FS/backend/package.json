@@ -1,0 +1,37 @@
+{
+  "name": "capstone-project-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall":  "prisma generate",
+    "build":        "prisma generate",
+    "start:prod":   "cross-env NODE_ENV=production node src/utils/server.js",
+    "start:dev":    "cross-env NODE_ENV=development nodemon src/utils/server.js",
+    "db:migrate":   "prisma migrate dev",
+    "db:deploy":    "prisma migrate deploy",
+    "db:studio":    "prisma studio"
+  },
+  "engines": { "node": ">=20.0.0" },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "joi": "^18.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "nanoid": "^5.1.9",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "prisma": "^6.19.3"
+  }
+}
