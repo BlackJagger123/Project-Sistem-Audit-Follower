@@ -9,7 +9,7 @@
 * **Real-time Account Audit:** Menarik sampel 50 pengikut terbaru dari akun target dan membedah metrik profilnya secara langsung (tanpa data usang).
 * **Deep Learning Detection:** Memanfaatkan arsitektur *Neural Network* dengan akurasi 96.45% untuk mendeteksi bot berdasarkan 11 fitur matriks perilaku akun.
 * **Multi-Token Fallback System:** Sistem pertahanan cerdas yang secara otomatis merotasi token API *scraper* (hingga 7 token cadangan) jika terjadi *limit* harian atau pemblokiran IP, sehingga API tetap tangguh (*robust*) tanpa *error 500*.
-* **Second Account (Sec Acc) Saver:** Algoritma penyaring khusus (*Manual Override*) untuk menyelamatkan akun sekunder milik manusia asli agar tidak salah divonis sebagai bot.
+* **Followers-Following Ratio Validation: Pengecekan ulang terhadap perbandingan jumlah followers dan following untuk memastikan akun manusia asli tidak salah terdeteksi sebagai bot (false positive).
 * **Smart Decision Logic:** Menerjemahkan hasil kalkulasi AI ke dalam 4 kategori rekomendasi bisnis: Sangat Berkualitas, Wajar, Waspada, dan Perlu Tinjauan Lanjut.
 
 ---
